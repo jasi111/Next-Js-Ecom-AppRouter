@@ -27,7 +27,7 @@ function ProductCard(props: any) {
             </Link>
             <div className="card-body d-flex flex-column">
                 <div>
-                <Link href={'/products/' + product.Id} className='fw-semibold text-center text-decoration-none text-dark'>
+                <Link href={'/products/' + product.id} className='fw-semibold text-center text-decoration-none text-dark'>
                       {product.title}
                       </Link>
                 </div>

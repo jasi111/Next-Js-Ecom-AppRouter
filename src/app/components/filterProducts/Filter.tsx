@@ -1,17 +1,27 @@
 'use client'
 
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, Suspense, useRef} from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ProductService } from '../../services/product-service'
 import ProductCard from '../prodcut-card/ProductCard';
+
 
 export default function Filter() {
     const [products, setProducts] = useState<any[]>([]); // State for all products
     const [filteredProducts, setFilteredProducts] = useState<any[]>([]); // State for filtered products
     const [searchText, setSearchText] = useState(''); // State for search input
     const router = useRouter();
-    const searchParams = useSearchParams(); // Hook to access query params
+    const searchParams = useSearchParams(); 
+    // Hook to access query params
+
+    // let queryParams:any;
+    // try {
+    //   queryParams = useSearchParams();
+    // } catch (err) {
+    //   console.error("Error initializing search params:", err);
+    // }
+    // const searchParams = queryParams ? queryParams.get("category") : "default";
    
     // Fetch products client-side
     useEffect(() => {
@@ -338,7 +348,9 @@ export default function Filter() {
                                     filteredProducts.map((p: any) => (
                                         <div className="col-12 col-sm-6 col-md-4 col-lg-3 p-4" key={p.id}>
                                             <div className="card">
+                                            <Suspense fallback={<div>Loading Products...</div>}>
                                                 <ProductCard product={p} />
+                                                </Suspense>
                                             </div>
                                         </div>
                                     ))
